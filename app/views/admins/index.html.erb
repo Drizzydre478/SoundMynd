@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Mynd</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome, <%= current_user.nickname %>!</h1>
+        <a href="/<%= current_user.id %>"></a>
+    </div>
+    <div class="group_container">
+        <div class="group_sessions">
+            <h1>Group Sessions</h1>
+            <br>
+            <% @groups.each do |group| %>
+                <div class="sess">
+                    <h3><%= group.name %></h3>
+                    <p><%= group.desc %></p>
+                    <p><%= group.time.strftime("%l:%M %p") %></p>
+                    <p><%= group.location %></p>
+                    <p><a href="/sound_mynds/<%= group.id %>">Group Profile</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="/sound_mynds/<%= group.id %>/edit" class="c">Edit</a>&nbsp;&nbsp;||&nbsp;&nbsp; <a href="/sound_mynds/<%= group.id %>" class="c" data-method="delete">Delete</a></p>
+                </div>
+                <br>
+            <% end %>
+        </div>
+        <div class="chem_depend">
+            <h1>Chemical Dependency Sessions</h1>
+            <br>
+            <% @groups1.each do |group| %>
+                <div class="sess">
+                    <h3><%= group.name %></h3>
+                    <p><%= group.desc %></p>
+                    <p><%= group.time.strftime("%l:%M %p") %></p>
+                    <p><%= group.location %></p>
+                    <p><a href="/sound_mynds/<%= group.id %>">Group Profile</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="/sound_mynds/<%= group.id %>/edit" class="c">Edit</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="/sound_mynds/<%= group.id %>" class="c" data-method="delete">Delete</a></p>
+                </div>
+                <br>
+            <% end %>
+        </div>
+    </div>
+    <div class="counselor_container">
+        <div class="counselors">
+            <h1>Counselors Onsite</h1>
+            <br>
+            <h3>Open Door Policy. Walk-ins Always Welcome.</h3>
+            <br>
+            <br>
+            <% @counselors.each do |counselor| %>
+                <div class="sess">
+                    <p>Name: <%= counselor.first_name %> <%= counselor.last_name %></p>
+                    <p>Specialty: <%= counselor.specialty %></p>
+                    <p><a href="/counselors/<%= counselor.id %>">Counselor Profile</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="/counselors/<%= counselor.id %>/edit" class="c">Edit</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="/counselors/<%= counselor.id %>" data-method="delete">Delete</a></p>
+                </div>
+                <br>
+            <% end %>
+        </div>
+    </div>
+    <div class="counselor_container">
+        <div class="counselors">
+            <h1>Users Registered</h1>
+            <br>
+            <h4>Total # of Users: <%= @users.count %></h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">nickname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @users.each do |user| %>
+                        <tr>
+                            <th scope="row"><%= user.first_name %> <%= user.last_name %></th>
+                            <td><%= user.nickname %></td>
+                            <td><%= user.email %></td>
+                            <td><a href="/users/<%= user.id %>" data-method="delete">Delete</a></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
